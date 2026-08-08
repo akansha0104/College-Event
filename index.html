@@ -1,0 +1,1510 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EventSphere - Event Management</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6fb;
+    color:#222;
+}
+
+/* NAVBAR */
+
+nav{
+    height:70px;
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 8%;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#6c5ce7;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.nav-links button,
+.nav-links a{
+    border:none;
+    background:none;
+    text-decoration:none;
+    color:#333;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-nav{
+    background:#6c5ce7 !important;
+    color:white !important;
+    padding:10px 18px;
+    border-radius:6px;
+}
+
+/* HERO */
+
+.hero{
+    min-height:470px;
+    display:flex;
+    align-items:center;
+    padding:60px 10%;
+    background:linear-gradient(135deg,#6c5ce7,#4834d4);
+    color:white;
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.hero h1{
+    font-size:50px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:19px;
+    line-height:1.6;
+    margin-bottom:30px;
+}
+
+.btn{
+    display:inline-block;
+    text-decoration:none;
+    background:white;
+    color:#6c5ce7;
+    padding:14px 25px;
+    border-radius:7px;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+}
+
+/* EVENTS */
+
+.events-section{
+    padding:60px 8%;
+}
+
+.events-section h2{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:35px;
+}
+
+.event-container{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.event-card{
+    width:300px;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.event-card:hover{
+    transform:translateY(-5px);
+}
+
+.event-card h3{
+    margin-bottom:15px;
+    color:#333;
+}
+
+.event-card p{
+    margin:8px 0;
+    color:#555;
+}
+
+.event-card button{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:#6c5ce7;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* LOGIN / SIGNUP */
+
+.auth-section{
+    min-height:calc(100vh - 70px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+    background:linear-gradient(135deg,#6c5ce7,#4834d4);
+}
+
+.auth-box{
+    width:100%;
+    max-width:430px;
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.auth-box h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.auth-box h1 span{
+    color:#6c5ce7;
+}
+
+.auth-box h2{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.auth-subtitle{
+    text-align:center;
+    color:#777;
+    margin-bottom:25px;
+}
+
+.auth-box label{
+    display:block;
+    margin:12px 0 6px;
+    font-weight:bold;
+}
+
+.auth-box input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    outline:none;
+}
+
+.auth-box input:focus{
+    border-color:#6c5ce7;
+}
+
+.auth-btn{
+    width:100%;
+    margin-top:22px;
+    padding:13px;
+    border:none;
+    border-radius:6px;
+    background:#6c5ce7;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.switch{
+    text-align:center;
+    margin-top:20px;
+}
+
+.switch a{
+    color:#6c5ce7;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    color:#555;
+    cursor:pointer;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    display:none;
+    padding:50px 8%;
+}
+
+.welcome{
+    background:linear-gradient(135deg,#6c5ce7,#4834d4);
+    color:white;
+    padding:35px;
+    border-radius:15px;
+}
+
+.welcome h1{
+    margin-bottom:10px;
+}
+
+.dashboard-buttons{
+    display:flex;
+    gap:15px;
+    margin:30px 0;
+}
+
+.dash-btn{
+    border:none;
+    text-decoration:none;
+    background:#6c5ce7;
+    color:white;
+    padding:13px 22px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.registered-box{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+.registered-box h2{
+    margin-bottom:20px;
+}
+
+/* TICKET */
+
+.ticket-section{
+    display:none;
+    padding:50px 20px;
+    text-align:center;
+}
+
+.ticket-section > h1{
+    margin-bottom:30px;
+}
+
+.ticket{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 25px rgba(0,0,0,0.12);
+    text-align:left;
+}
+
+.ticket-header{
+    background:linear-gradient(135deg,#6c5ce7,#4834d4);
+    color:white;
+    padding:25px;
+    text-align:center;
+}
+
+.ticket-header h2{
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+.ticket-content{
+    display:flex;
+    justify-content:space-between;
+    gap:30px;
+    padding:30px;
+}
+
+.ticket-content p{
+    margin:8px 0;
+}
+
+.ticket-content h3{
+    margin-bottom:15px;
+}
+
+.qr-container{
+    text-align:center;
+}
+
+.qr-container img{
+    width:180px;
+    height:180px;
+}
+
+.qr-container p{
+    color:#777;
+}
+
+.ticket-status{
+    text-align:center;
+    background:#e8f8ee;
+    color:#16803c;
+    padding:15px;
+    font-weight:bold;
+}
+
+.print-btn{
+    margin-top:25px;
+    padding:13px 25px;
+    background:#6c5ce7;
+    color:white;
+    border:none;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:25px;
+    background:#222;
+    color:white;
+    margin-top:50px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    nav{
+        padding:0 5%;
+    }
+
+    .nav-links{
+        gap:8px;
+    }
+
+    .nav-links a{
+        display:none;
+    }
+
+    .hero{
+        padding:50px 7%;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .dashboard-buttons{
+        flex-direction:column;
+    }
+
+    .ticket-content{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+
+}
+
+@media print{
+
+    nav,
+    .print-btn,
+    footer{
+        display:none !important;
+    }
+
+    .ticket-section{
+        display:block !important;
+    }
+
+    .ticket{
+        box-shadow:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+        Event<span>Sphere</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="#" onclick="showHome()">Home</a>
+
+        <a href="#events" onclick="showHome()">Events</a>
+
+        <button id="dashboardNav"
+                onclick="showDashboard()"
+                style="display:none;">
+            Dashboard
+        </button>
+
+        <button id="loginNav"
+                class="login-nav"
+                onclick="showLogin()">
+            Candidate Login
+        </button>
+
+        <button id="logoutNav"
+                onclick="logout()"
+                style="display:none;">
+            Logout
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="homeSection">
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Discover. Register. Experience.
+            </h1>
+
+            <p>
+                EventSphere is your complete event management
+                platform where candidates can discover events,
+                register online and receive digital QR tickets.
+            </p>
+
+            <button class="btn"
+                    onclick="showLogin()">
+                Candidate Login
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- EVENTS -->
+
+    <section class="events-section"
+             id="events">
+
+        <h2>
+            Upcoming Events
+        </h2>
+
+        <div class="event-container">
+
+            <div class="event-card">
+
+                <h3>
+                    Tech Fest 2026
+                </h3>
+
+                <p>
+                    📅 20 August 2026
+                </p>
+
+                <p>
+                    📍 Jodhpur
+                </p>
+
+                <p>
+                    💻 Technology & Innovation
+                </p>
+
+                <button onclick="registerEvent('Tech Fest 2026')">
+                    Register Now
+                </button>
+
+            </div>
+
+
+            <div class="event-card">
+
+                <h3>
+                    Hackathon 2026
+                </h3>
+
+                <p>
+                    📅 25 August 2026
+                </p>
+
+                <p>
+                    📍 Jodhpur
+                </p>
+
+                <p>
+                    🚀 Coding & Innovation
+                </p>
+
+                <button onclick="registerEvent('Hackathon 2026')">
+                    Register Now
+                </button>
+
+            </div>
+
+
+            <div class="event-card">
+
+                <h3>
+                    AI Workshop
+                </h3>
+
+                <p>
+                    📅 30 August 2026
+                </p>
+
+                <p>
+                    📍 Jodhpur
+                </p>
+
+                <p>
+                    🤖 Artificial Intelligence
+                </p>
+
+                <button onclick="registerEvent('AI Workshop')">
+                    Register Now
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+<!-- ================= LOGIN ================= -->
+
+<section id="loginSection"
+         class="auth-section">
+
+    <div class="auth-box">
+
+        <h1>
+            Event<span>Sphere</span>
+        </h1>
+
+        <h2>
+            Candidate Login
+        </h2>
+
+        <p class="auth-subtitle">
+            Login to manage your event registrations
+        </p>
+
+        <form onsubmit="candidateLogin(event)">
+
+            <label>
+                Email
+            </label>
+
+            <input type="email"
+                   id="loginEmail"
+                   placeholder="Enter your email"
+                   required>
+
+            <label>
+                Password
+            </label>
+
+            <input type="password"
+                   id="loginPassword"
+                   placeholder="Enter your password"
+                   required>
+
+            <button type="submit"
+                    class="auth-btn">
+                Login
+            </button>
+
+        </form>
+
+        <p class="switch">
+
+            Don't have an account?
+
+            <a onclick="showSignup()">
+                Create Account
+            </a>
+
+        </p>
+
+        <div class="back"
+             onclick="showHome()">
+            ← Back to Home
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SIGNUP ================= -->
+
+<section id="signupSection"
+         class="auth-section">
+
+    <div class="auth-box">
+
+        <h1>
+            Event<span>Sphere</span>
+        </h1>
+
+        <h2>
+            Create Candidate Account
+        </h2>
+
+        <p class="auth-subtitle">
+            Register to participate in events
+        </p>
+
+        <form onsubmit="candidateSignup(event)">
+
+            <label>
+                Full Name
+            </label>
+
+            <input type="text"
+                   id="signupName"
+                   placeholder="Enter your full name"
+                   required>
+
+
+            <label>
+                Email
+            </label>
+
+            <input type="email"
+                   id="signupEmail"
+                   placeholder="Enter your email"
+                   required>
+
+
+            <label>
+                Password
+            </label>
+
+            <input type="password"
+                   id="signupPassword"
+                   placeholder="Create password"
+                   required>
+
+
+            <label>
+                Confirm Password
+            </label>
+
+            <input type="password"
+                   id="confirmPassword"
+                   placeholder="Confirm password"
+                   required>
+
+
+            <button type="submit"
+                    class="auth-btn">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <p class="switch">
+
+            Already have an account?
+
+            <a onclick="showLogin()">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section id="dashboardSection"
+         class="dashboard">
+
+    <div class="welcome">
+
+        <h1 id="welcomeText">
+            Welcome 👋
+        </h1>
+
+        <p>
+            Manage your event registrations and digital tickets.
+        </p>
+
+    </div>
+
+
+    <div class="dashboard-buttons">
+
+        <button class="dash-btn"
+                onclick="showHome()">
+            Browse Events
+        </button>
+
+        <button class="dash-btn"
+                onclick="showTicket()">
+            My QR Ticket
+        </button>
+
+    </div>
+
+
+    <div class="registered-box">
+
+        <h2>
+            My Registered Event
+        </h2>
+
+        <div id="registeredEvent">
+
+            <p>
+                No event registered yet.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TICKET ================= -->
+
+<section id="ticketSection"
+         class="ticket-section">
+
+    <h1>
+        My Event Ticket
+    </h1>
+
+
+    <div class="ticket">
+
+        <div class="ticket-header">
+
+            <h2>
+                EventSphere
+            </h2>
+
+            <p>
+                Digital Event Ticket
+            </p>
+
+        </div>
+
+
+        <div class="ticket-content">
+
+            <div>
+
+                <p>
+                    <strong>Candidate</strong>
+                </p>
+
+                <h3 id="ticketName">
+                    Candidate
+                </h3>
+
+
+                <p>
+                    <strong>Event</strong>
+                </p>
+
+                <h3 id="ticketEvent">
+                    Event
+                </h3>
+
+
+                <p>
+                    <strong>Date</strong>
+                </p>
+
+                <p id="ticketDate">
+                    20 August 2026
+                </p>
+
+
+                <p>
+                    <strong>Ticket ID</strong>
+                </p>
+
+                <p id="ticketId">
+                    ES-000000
+                </p>
+
+            </div>
+
+
+            <div class="qr-container">
+
+                <img id="qrCode"
+                     src=""
+                     alt="QR Code">
+
+                <p>
+                    Scan to verify
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="ticket-status">
+
+            ✓ REGISTERED
+
+        </div>
+
+    </div>
+
+
+    <button class="print-btn"
+            onclick="window.print()">
+
+        🖨 Print / Save Ticket
+
+    </button>
+
+
+    <br><br>
+
+    <button class="dash-btn"
+            onclick="showDashboard()">
+
+        ← Back to Dashboard
+
+    </button>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 EventSphere | Event Management System
+    </p>
+
+</footer>
+
+
+
+<script>
+
+/* =========================================
+   PAGE CONTROL
+========================================= */
+
+function hideAll(){
+
+    document.getElementById("homeSection").style.display="none";
+
+    document.getElementById("loginSection").style.display="none";
+
+    document.getElementById("signupSection").style.display="none";
+
+    document.getElementById("dashboardSection").style.display="none";
+
+    document.getElementById("ticketSection").style.display="none";
+
+}
+
+
+/* HOME */
+
+function showHome(){
+
+    hideAll();
+
+    document.getElementById("homeSection").style.display="block";
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* LOGIN */
+
+function showLogin(){
+
+    hideAll();
+
+    document.getElementById("loginSection").style.display="flex";
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* SIGNUP */
+
+function showSignup(){
+
+    hideAll();
+
+    document.getElementById("signupSection").style.display="flex";
+
+    window.scrollTo(0,0);
+
+}
+
+
+/* DASHBOARD */
+
+function showDashboard(){
+
+    const loggedIn =
+        localStorage.getItem("loggedIn");
+
+    if(loggedIn !== "true"){
+
+        showLogin();
+
+        return;
+
+    }
+
+    hideAll();
+
+    document.getElementById("dashboardSection").style.display="block";
+
+    loadDashboard();
+
+}
+
+
+/* TICKET */
+
+function showTicket(){
+
+    const loggedIn =
+        localStorage.getItem("loggedIn");
+
+    if(loggedIn !== "true"){
+
+        showLogin();
+
+        return;
+
+    }
+
+    hideAll();
+
+    document.getElementById("ticketSection").style.display="block";
+
+    loadTicket();
+
+}
+
+
+/* =========================================
+   SIGNUP
+========================================= */
+
+function candidateSignup(event){
+
+    event.preventDefault();
+
+
+    const name =
+        document.getElementById("signupName").value.trim();
+
+
+    const email =
+        document.getElementById("signupEmail").value.trim();
+
+
+    const password =
+        document.getElementById("signupPassword").value;
+
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+
+    if(password !== confirmPassword){
+
+        alert("Passwords do not match!");
+
+        return;
+
+    }
+
+
+    if(password.length < 6){
+
+        alert("Password must contain at least 6 characters.");
+
+        return;
+
+    }
+
+
+    const candidate = {
+
+        name:name,
+
+        email:email,
+
+        password:password
+
+    };
+
+
+    localStorage.setItem(
+        "candidate",
+        JSON.stringify(candidate)
+    );
+
+
+    alert(
+        "Account created successfully!"
+    );
+
+
+    showLogin();
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+function candidateLogin(event){
+
+    event.preventDefault();
+
+
+    const email =
+        document.getElementById("loginEmail").value.trim();
+
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+
+    const savedCandidate =
+        JSON.parse(
+            localStorage.getItem("candidate")
+        );
+
+
+    if(!savedCandidate){
+
+        alert(
+            "Account not found. Please create an account first."
+        );
+
+        showSignup();
+
+        return;
+
+    }
+
+
+    if(
+        email === savedCandidate.email &&
+        password === savedCandidate.password
+    ){
+
+        localStorage.setItem(
+            "loggedIn",
+            "true"
+        );
+
+
+        alert(
+            "Login successful!"
+        );
+
+
+        updateNavbar();
+
+        showDashboard();
+
+    }
+
+    else{
+
+        alert(
+            "Invalid email or password!"
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   EVENT REGISTRATION
+========================================= */
+
+function registerEvent(eventName){
+
+    const loggedIn =
+        localStorage.getItem("loggedIn");
+
+
+    if(loggedIn !== "true"){
+
+        alert(
+            "Please login as a candidate first."
+        );
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    const candidate =
+        JSON.parse(
+            localStorage.getItem("candidate")
+        );
+
+
+    const ticketId =
+        "ES-" +
+        new Date().getFullYear() +
+        "-" +
+        Math.floor(
+            100000 + Math.random() * 900000
+        );
+
+
+    const registration = {
+
+        name:candidate.name,
+
+        email:candidate.email,
+
+        event:eventName,
+
+        ticketId:ticketId,
+
+        date:"20 August 2026"
+
+    };
+
+
+    localStorage.setItem(
+        "registration",
+        JSON.stringify(registration)
+    );
+
+
+    alert(
+        "Registration successful!\n\nTicket ID: " +
+        ticketId
+    );
+
+
+    showTicket();
+
+}
+
+
+/* =========================================
+   LOAD DASHBOARD
+========================================= */
+
+function loadDashboard(){
+
+    const candidate =
+        JSON.parse(
+            localStorage.getItem("candidate")
+        );
+
+
+    if(!candidate){
+
+        showLogin();
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "welcomeText"
+    ).innerText =
+        "Welcome, " +
+        candidate.name +
+        " 👋";
+
+
+    const registration =
+        JSON.parse(
+            localStorage.getItem("registration")
+        );
+
+
+    const eventBox =
+        document.getElementById(
+            "registeredEvent"
+        );
+
+
+    if(registration){
+
+        eventBox.innerHTML = `
+
+            <div class="event-card">
+
+                <h3>
+                    ${registration.event}
+                </h3>
+
+                <p>
+                    👤 ${registration.name}
+                </p>
+
+                <p>
+                    📧 ${registration.email}
+                </p>
+
+                <p>
+                    🎟 ${registration.ticketId}
+                </p>
+
+                <p>
+                    📅 ${registration.date}
+                </p>
+
+                <p>
+                    ✓ Registration Confirmed
+                </p>
+
+                <br>
+
+                <button
+                    onclick="showTicket()">
+
+                    View QR Ticket
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+    else{
+
+        eventBox.innerHTML = `
+
+            <p>
+                You have not registered for any event yet.
+            </p>
+
+            <br>
+
+            <button
+                class="dash-btn"
+                onclick="showHome()">
+
+                Browse Events
+
+            </button>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   LOAD TICKET
+========================================= */
+
+function loadTicket(){
+
+    const registration =
+        JSON.parse(
+            localStorage.getItem("registration")
+        );
+
+
+    if(!registration){
+
+        alert(
+            "You have not registered for any event."
+        );
+
+        showHome();
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "ticketName"
+    ).innerText =
+        registration.name;
+
+
+    document.getElementById(
+        "ticketEvent"
+    ).innerText =
+        registration.event;
+
+
+    document.getElementById(
+        "ticketId"
+    ).innerText =
+        registration.ticketId;
+
+
+    document.getElementById(
+        "ticketDate"
+    ).innerText =
+        registration.date;
+
+
+    /*
+       QR CODE
+
+       The QR code contains the ticket
+       information.
+    */
+
+    const qrData =
+        encodeURIComponent(
+
+            "EventSphere Ticket\n" +
+
+            "Ticket ID: " +
+            registration.ticketId +
+
+            "\nCandidate: " +
+            registration.name +
+
+            "\nEvent: " +
+            registration.event
+
+        );
+
+
+    document.getElementById(
+        "qrCode"
+    ).src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="
+        + qrData;
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logout(){
+
+    localStorage.removeItem(
+        "loggedIn"
+    );
+
+
+    updateNavbar();
+
+
+    showHome();
+
+}
+
+
+/* =========================================
+   NAVBAR UPDATE
+========================================= */
+
+function updateNavbar(){
+
+    const loggedIn =
+        localStorage.getItem("loggedIn")
+        === "true";
+
+
+    document.getElementById(
+        "loginNav"
+    ).style.display =
+        loggedIn ? "none" : "block";
+
+
+    document.getElementById(
+        "dashboardNav"
+    ).style.display =
+        loggedIn ? "block" : "none";
+
+
+    document.getElementById(
+        "logoutNav"
+    ).style.display =
+        loggedIn ? "block" : "none";
+
+}
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+updateNavbar();
+
+showHome();
+
+</script>
+
+
+</body>
+</html>
+```
